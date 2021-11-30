@@ -2,7 +2,7 @@ import "./ProductPage.scss";
 import axios from "axios";
 import React from "react";
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class ProductPage extends Component {
   state = {
@@ -37,6 +37,8 @@ class ProductPage extends Component {
   addToCart(e) {
     e.preventDefault();
     localStorage.setItem(`${e.target[0].name}`, `${e.target[0].value}`);
+    alert("Added to cart");
+    e.target.reset();
   }
 
   render() {
@@ -52,10 +54,12 @@ class ProductPage extends Component {
         />
         <p>Product Description: {this.state.description}</p>
         <p>Price: ${this.state.price}</p>
+        <p>Stock: {this.state.quantity}</p>
         <div>
           <form action="#" onSubmit={this.addToCart}>
             <label htmlFor="quantity">Quantity</label>
             <input type="number" id="quantity" name={this.state.name} min="0" max="99" />
+            <button type="submit">Add to cart</button>
           </form>
         </div>
       </div>

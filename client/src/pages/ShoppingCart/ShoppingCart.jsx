@@ -44,7 +44,7 @@ class ShoppingCart extends React.Component {
                   ),
                 price: [
                   ...prevState.price,
-                  parseInt(this.state.productList[j].price),
+                  parseFloat(this.state.productList[j].price),
                 ],
                 image: [...prevState.image, this.state.productList[j].image],
                 quantityPrice: [
@@ -70,6 +70,56 @@ class ShoppingCart extends React.Component {
       });
   }
 
+  deleteItemFromCart = (e) => {
+    e.preventDefault();
+    this.state.shoppingCart.map((product, count) => {
+      if (product === e.target.value) {
+        this.setState({
+          totalPrice: this.state.totalPrice - (localStorage.getItem(`${product}`) * this.state.price[count]).toFixed(2),
+          totalQuantity: this.state.totalQuantity - localStorage.getItem(`${product}`),
+        });
+        this.state.shoppingCart.splice(count, 1);
+        this.state.image.splice(count, 1);
+        this.state.quantity.splice(count, 1);
+        this.state.price.splice(count, 1);
+        this.state.quantityPrice.splice(count, 1);
+        this.state.productList.splice(count, 1);
+        localStorage.removeItem(`${e.target.value}`);
+      }
+    });
+  };
+
+  addItemQuantity = (e) => {
+    e.preventDefault();
+    let prevQuantity = parseInt(localStorage.getItem(`${e.target.value}`));
+    prevQuantity++;
+    localStorage.setItem(`${e.target.value}`, `${prevQuantity}`);
+
+    this.state.shoppingCart.map((product, count) => {
+      if (product === e.target.value) {
+        this.setState({
+          totalPrice: this.state.totalPrice + this.state.price[count],
+          totalQuantity: this.state.totalQuantity + 1,
+        });
+      }
+    });
+  };
+
+  reduceItemQuantity = (e) => {
+    e.preventDefault();
+    let prevQuantity = parseInt(localStorage.getItem(`${e.target.value}`));
+    prevQuantity--;
+    localStorage.setItem(`${e.target.value}`, `${prevQuantity}`);
+
+    this.state.shoppingCart.map((product, count) => {
+      if (product === e.target.value) {
+        this.setState({
+          totalPrice: this.state.totalPrice - this.state.price[count],
+          totalQuantity: this.state.totalQuantity - 1,
+        });
+      }
+    });
+  };
   render() {
     let isLoading = this.state.isLoading;
     if (isLoading) {
@@ -83,8 +133,8 @@ class ShoppingCart extends React.Component {
             <h5 className="Action">Remove all</h5>
           </div>
 
-          {this.state.shoppingCart.map((products, count) => (
-            <div className="Cart-Items">
+          {this.state.shoppingCart.map((product, count) => (
+            <div key={product} className="Cart-Items">
               <div className="image-box">
                 <img
                   className="image-height"
@@ -93,18 +143,34 @@ class ShoppingCart extends React.Component {
                 />
               </div>
               <div className="about">
-                <h1 className="title">{products}</h1>
+                <h1 className="title">{product}</h1>
               </div>
               <div className="counter">
-                <div className="btn">+</div>
-                <div className="count">{this.state.quantity[count]}</div>
-                <div className="btn">-</div>
+                <button
+                  className="btn"
+                  onClick={this.addItemQuantity}
+                  value={product}
+                >
+                  +
+                </button>
+                <div className="count">{localStorage.getItem(`${product}`)}</div>
+                <button
+                  className="btn"
+                  onClick={this.reduceItemQuantity}
+                  value={product}
+                >
+                  -
+                </button>
               </div>
               <div className="prices">
-                <div className="amount">${this.state.quantityPrice[count]}</div>
-                <div className="remove">
-                  <u>Remove</u>
-                </div>
+                <div className="amount">${ (localStorage.getItem(`${product}`) * this.state.price[count]).toFixed(2)}</div>
+                <button
+                  className="remove"
+                  onClick={this.deleteItemFromCart}
+                  value={product}
+                >
+                  Remove
+                </button>
               </div>
             </div>
           ))}
@@ -117,25 +183,17 @@ class ShoppingCart extends React.Component {
                 <div className="Subtotal">Sub-Total</div>
                 <div className="items">{this.state.totalQuantity} items</div>
               </div>
-              <div className="total-amount">${this.state.totalPrice.toFixed(2)}</div>
+              <div className="total-amount">
+                $
+                {this.state.totalPrice
+                  ? `${this.state.totalPrice.toFixed(2)}`
+                  : 0.0}
+              </div>
             </div>
             <button className="button">Checkout</button>
           </div>
         </div>
       </div>
-
-      // <div>
-      //   {this.state.shoppingCart.map((products, count) => (
-      //     <p key={products}>
-      //       Product Name: {products} Quantity: {this.state.quantity[count]}{" "}
-      //       Price: ${this.state.quantityPrice[count]}
-      //       <img
-      //         src={`http://localhost:8080/images/${this.state.image[count]}`}
-      //         alt="product"
-      //       />
-      //     </p>
-      //   ))}
-      // </div>
     );
   }
 }
