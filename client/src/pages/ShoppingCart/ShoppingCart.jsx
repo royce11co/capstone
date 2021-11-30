@@ -55,11 +55,14 @@ class ShoppingCart extends React.Component {
                     ) * this.state.productList[j].price
                   ).toFixed(2),
                 ],
+                totalPrice:
+                  Number(prevState.totalPrice) +
+                  localStorage.getItem(`${this.state.productList[j].name}`) *
+                    this.state.productList[j].price,
               }));
             }
           }
         }
-        console.log(typeof this.state.quantityPrice[0])
         this.setState({ isLoading: false });
       })
       .catch((error) => {
@@ -114,7 +117,7 @@ class ShoppingCart extends React.Component {
                 <div className="Subtotal">Sub-Total</div>
                 <div className="items">{this.state.totalQuantity} items</div>
               </div>
-              <div className="total-amount">{this.state.totalPrice}</div>
+              <div className="total-amount">${this.state.totalPrice.toFixed(2)}</div>
             </div>
             <button className="button">Checkout</button>
           </div>
