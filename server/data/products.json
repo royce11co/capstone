@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": "9b4f79ea-0e6c-4e59-8e05-afd933d0b3d3",
+      "name": "RAW Organic Cones Pre-Rolled 1 1/4 Box 900",
+      "description": "Organic Hemp | Non-GMO | Windmill Powered Product | Total Chlorine Free | Vegan Friendly Product | Naturally unbleached | No additives | Patented criss | cross watermark | Acacia gumline | 800 Cones/Box | 110mm w/ 26mm TIP",
+      "status": "In Stock",
+      "image": "raw_organic_900.jpg",
+      "price": "149.27",
+      "quantity": 500,
+      "inCart": 0
+    },
+    {
+      "id": "83433026-ca32-4c6d-bd86-a39ee8b7303e",
+      "name": "Raw Natural Unrefined Pre-Rolled Filter Tips 3 Pack (21 Per Box)",
+      "description": "Raw natural unrefined pre-rolled filter tips 3 pack (21 per box).",
+      "status": "Out of Stock",
+      "image": "raw_unrefined_21_per_box.jpg",
+      "price": "6.89",
+      "quantity": 0,
+      "inCart": 0
+    },
+    {
+      "id": "a193a6a7-42ab-4182-97dc-555ee85e7486",
+      "name": "Raw Natural Unrefined Pre-Rolled Tips (200)",
+      "description": "All RAW Pre-Rolled Tips are made from the purest vegan-friendly natural fibers, and now come in a bulk pack of 200 tips. Each Pre-Rolled Tip is perfectly round and features internal support for lasting strength and strong base for your precious rolls.",
+      "status": "Out of Stock",
+      "image": "raw_unrefined_200.jpg",
+      "price": "13.94",
+      "quantity": 0,
+      "inCart": 0
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+.home {
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+    justify-content: center;
+  }
+  &__card{
+      &--link{
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        padding: 1rem;
+      }
+      &--image{
+        max-width:100%;
+        max-height:70%;
+        padding-bottom: 0.5rem;
+      }
+      &--title{
+      }
+  }
+}
