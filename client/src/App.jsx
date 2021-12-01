@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import './App.scss';
 import ShoppingCart from "./pages/ShoppingCart/ShoppingCart";
+import AddProduct from "./pages/AddProduct/AddProduct";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         <Route path='/' exact component={HomePage} />
         <Route path='/cart' exact component={ShoppingCart}/>
+        <Route path='/products/add' exact component={AddProduct}/>
         <Route path='/products/:id' exact component={ProductPage}/>
       </Switch>
     </BrowserRouter>

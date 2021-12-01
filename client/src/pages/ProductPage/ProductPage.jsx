@@ -9,7 +9,6 @@ class ProductPage extends Component {
     description: "",
     name: "",
     quantity: "",
-    status: "",
     image: "",
     price: "",
     isLoading: true,
@@ -23,7 +22,6 @@ class ProductPage extends Component {
           description: data.description,
           name: data.name,
           quantity: data.quantity,
-          status: data.status.toUpperCase(),
           price: data.price,
           isLoading: false,
           image: data.image,
@@ -49,7 +47,7 @@ class ProductPage extends Component {
     return (
       <div>
         <img
-          src={`http://localhost:8080/images/${this.state.image}`}
+          src={`${this.state.image}`}
           alt="product"
         />
         <p>Product Description: {this.state.description}</p>

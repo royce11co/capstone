@@ -10,7 +10,7 @@ class ProductList extends React.Component {
 
   componentDidMount() {
     axios.get("http://localhost:8080/products").then((response) => {
-      this.setState({ products: response.data });
+      this.setState({ products: response.data});
     });
   }
 
@@ -23,7 +23,7 @@ class ProductList extends React.Component {
             <Link key={products.id} className="home__card--link" to={`/products/${products.id}`}>
               <img
                 className="home__card--image"
-                src={`http://localhost:8080/images/${products.image}`}
+                src={`${products.image}`}
                 alt="product"
               />
               <h2 key="{item}" className="home__card--title">{products.name}</h2>

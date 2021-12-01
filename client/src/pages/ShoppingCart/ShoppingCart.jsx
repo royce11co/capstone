@@ -12,7 +12,6 @@ class ShoppingCart extends React.Component {
     price: [],
     totalPrice: null,
     totalQuantity: null,
-    quantityPrice: [],
     isLoading: true,
   };
 
@@ -47,14 +46,6 @@ class ShoppingCart extends React.Component {
                   parseFloat(this.state.productList[j].price),
                 ],
                 image: [...prevState.image, this.state.productList[j].image],
-                quantityPrice: [
-                  ...prevState.quantityPrice,
-                  (
-                    parseInt(
-                      localStorage.getItem(`${this.state.productList[j].name}`)
-                    ) * this.state.productList[j].price
-                  ).toFixed(2),
-                ],
                 totalPrice:
                   Number(prevState.totalPrice) +
                   localStorage.getItem(`${this.state.productList[j].name}`) *
@@ -72,7 +63,7 @@ class ShoppingCart extends React.Component {
 
   deleteItemFromCart = (e) => {
     e.preventDefault();
-    this.state.shoppingCart.map((product, count) => {
+    this.state.shoppingCart.forEach((product, count) => {
       if (product === e.target.value) {
         this.setState({
           totalPrice: this.state.totalPrice - (localStorage.getItem(`${product}`) * this.state.price[count]).toFixed(2),
@@ -82,7 +73,6 @@ class ShoppingCart extends React.Component {
         this.state.image.splice(count, 1);
         this.state.quantity.splice(count, 1);
         this.state.price.splice(count, 1);
-        this.state.quantityPrice.splice(count, 1);
         this.state.productList.splice(count, 1);
         localStorage.removeItem(`${e.target.value}`);
       }
@@ -95,7 +85,7 @@ class ShoppingCart extends React.Component {
     prevQuantity++;
     localStorage.setItem(`${e.target.value}`, `${prevQuantity}`);
 
-    this.state.shoppingCart.map((product, count) => {
+    this.state.shoppingCart.forEach((product, count) => {
       if (product === e.target.value) {
         this.setState({
           totalPrice: this.state.totalPrice + this.state.price[count],
@@ -111,7 +101,7 @@ class ShoppingCart extends React.Component {
     prevQuantity--;
     localStorage.setItem(`${e.target.value}`, `${prevQuantity}`);
 
-    this.state.shoppingCart.map((product, count) => {
+    this.state.shoppingCart.forEach((product, count) => {
       if (product === e.target.value) {
         this.setState({
           totalPrice: this.state.totalPrice - this.state.price[count],
@@ -120,6 +110,7 @@ class ShoppingCart extends React.Component {
       }
     });
   };
+  
   render() {
     let isLoading = this.state.isLoading;
     if (isLoading) {
@@ -138,7 +129,7 @@ class ShoppingCart extends React.Component {
               <div className="image-box">
                 <img
                   className="image-height"
-                  src={`http://localhost:8080/images/${this.state.image[count]}`}
+                  src={`${this.state.image[count]}`}
                   alt="product"
                 />
               </div>
@@ -148,18 +139,18 @@ class ShoppingCart extends React.Component {
               <div className="counter">
                 <button
                   className="btn"
-                  onClick={this.addItemQuantity}
-                  value={product}
-                >
-                  +
-                </button>
-                <div className="count">{localStorage.getItem(`${product}`)}</div>
-                <button
-                  className="btn"
                   onClick={this.reduceItemQuantity}
                   value={product}
                 >
                   -
+                </button>
+                <div className="count">{localStorage.getItem(`${product}`)}</div>
+                <button
+                  className="btn"
+                  onClick={this.addItemQuantity}
+                  value={product}
+                >
+                  +
                 </button>
               </div>
               <div className="prices">
