@@ -1,0 +1,37 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+
+.add-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  &__title {
+      display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+  &-form {
+    &__group {
+      display: flex;
+    }
+    &__subtitle {
+      padding: 0 1rem;
+      width: 50%;
+    }
+    &__label {
+      padding: 1rem 1rem;
+      width: 30%;
+    }
+    &__input {
+      margin-bottom: 1rem;
+    }
+    &__textarea {
+      margin-bottom: 1rem;
+    }
+    &__btn{
+        width: 50%;
+    }
+  }
+}

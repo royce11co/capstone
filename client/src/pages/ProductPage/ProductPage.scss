@@ -1,0 +1,41 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.product-page{
+    &__container{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        &--image{
+            display: flex;
+            max-width: 100%;
+            padding: 1rem;
+            @include desktop{
+                max-width: 50%;
+                margin: auto;
+                justify-content: center;
+            }
+        }
+        &--description{
+            width: 100%;
+            padding: 1rem;
+        }
+        &--price{
+            width: 100%;
+            padding: 0 0 1rem 1rem;
+        }
+        &--stock{
+            width: 100%;
+            padding: 0 0 1rem 1rem;
+        }
+        &--quantity{
+            padding: 0 1rem;
+        }
+        &--button{
+            width: 100%;
+            margin-top: 1rem;
+            margin-left: 1rem;
+            justify-content: center;
+        }
+    }
+}

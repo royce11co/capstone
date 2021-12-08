@@ -1,9 +1,9 @@
-import "./HomePage.scss";
+import "./EditProductList.scss";
 import { Link } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 
-class ProductList extends React.Component {
+class EditProductList extends React.Component {
   state = {
     products: [],
   };
@@ -17,10 +17,10 @@ class ProductList extends React.Component {
   render() {
     return (
       <div className="home">
-        <h1 class="home__title">Home Page</h1>
+        <h1 class="home__title">Edit Products</h1>
         <div className="home__container">
           {this.state.products.map((products) => (
-            <Link key={products.id} className="home__card--link" to={`/products/${products.id}`}>
+            <Link key={products.id} className="home__card--link" to={`/products/edit/${products.id}`}>
               <img
                 className="home__card--image"
                 src={`${products.image}`}
@@ -35,4 +35,4 @@ class ProductList extends React.Component {
   }
 }
 
-export default ProductList;
+export default EditProductList;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./AddProduct.scss";
 import axios from "axios";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class AddProduct extends React.Component {
   state = {
@@ -142,6 +142,7 @@ class AddProduct extends React.Component {
                 </div>
               )}
             </div>
+
             <div className="add-item-form__group">
               <label className="add-item-form__label" htmlFor="description">
                 Description
@@ -219,7 +220,7 @@ class AddProduct extends React.Component {
 
             <div className="add-item-form__group">
               <label className="add-item-form__label" htmlFor="quantity">
-                QTY
+                Quantity
               </label>
               <input
                 className={`add-item-form__input ${

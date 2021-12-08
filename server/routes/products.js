@@ -11,10 +11,17 @@ const productsFile = path.join(__dirname, "../data/products.json");
 router.use(express.static(path.join(__dirname, "public")));
 router.use(cors());
 
-function listProducts() {
-  const data = fs.readFileSync(productsFile);
-  return JSON.parse(data);
-}
+let listProducts = () => {
+  const productsParse = JSON.parse(
+    fs.readFileSync("./data/products.json", "utf8", (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      return data;
+    })
+  );
+  return productsParse;
+};
 
 function addProducts(body) {
   const productsArr = listProducts();
@@ -56,5 +63,32 @@ router.get("/:id", (req, res) => {
     }
   });
 });
+
+
+let productUpdate = (data) => {
+  fs.writeFile('./data/products.json', JSON.stringify(data), (error) => {
+      if (error) {
+          console.log(error);
+      }
+      console.log('Product has been updated');
+  })
+}
+
+router.put('/edit/:id/update', (req, res) => {
+  const productsData = listProducts();
+  const foundProduct = productsData.products.find(products => req.params.id === products.id);
+  if (!foundProduct) {
+      res.status(404).json({
+          error: "Product not found"
+      });
+  }
+  foundProduct.name = req.body.name || foundProduct.name;
+  foundProduct.description = req.body.description || foundProduct.description;
+  foundProduct.quantity = req.body.quantity || foundProduct.quantity;
+  foundProduct.image = foundProduct.image;
+  foundProduct.price = req.body.price || foundProduct.price;
+  productUpdate(productsData);
+  res.status(200).json(foundProduct);
+})
 
 module.exports = router;

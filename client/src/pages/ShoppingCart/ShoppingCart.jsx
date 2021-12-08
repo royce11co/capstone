@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./ShoppingCart.scss";
 
 class ShoppingCart extends React.Component {
@@ -66,8 +67,13 @@ class ShoppingCart extends React.Component {
     this.state.shoppingCart.forEach((product, count) => {
       if (product === e.target.value) {
         this.setState({
-          totalPrice: this.state.totalPrice - (localStorage.getItem(`${product}`) * this.state.price[count]).toFixed(2),
-          totalQuantity: this.state.totalQuantity - localStorage.getItem(`${product}`),
+          totalPrice:
+            this.state.totalPrice -
+            (
+              localStorage.getItem(`${product}`) * this.state.price[count]
+            ).toFixed(2),
+          totalQuantity:
+            this.state.totalQuantity - localStorage.getItem(`${product}`),
         });
         this.state.shoppingCart.splice(count, 1);
         this.state.image.splice(count, 1);
@@ -110,7 +116,7 @@ class ShoppingCart extends React.Component {
       }
     });
   };
-  
+
   render() {
     let isLoading = this.state.isLoading;
     if (isLoading) {
@@ -144,7 +150,9 @@ class ShoppingCart extends React.Component {
                 >
                   -
                 </button>
-                <div className="count">{localStorage.getItem(`${product}`)}</div>
+                <div className="count">
+                  {localStorage.getItem(`${product}`)}
+                </div>
                 <button
                   className="btn"
                   onClick={this.addItemQuantity}
@@ -154,7 +162,12 @@ class ShoppingCart extends React.Component {
                 </button>
               </div>
               <div className="prices">
-                <div className="amount">${ (localStorage.getItem(`${product}`) * this.state.price[count]).toFixed(2)}</div>
+                <div className="amount">
+                  $
+                  {(
+                    localStorage.getItem(`${product}`) * this.state.price[count]
+                  ).toFixed(2)}
+                </div>
                 <button
                   className="remove"
                   onClick={this.deleteItemFromCart}
@@ -181,7 +194,9 @@ class ShoppingCart extends React.Component {
                   : 0.0}
               </div>
             </div>
-            <button className="button">Checkout</button>
+            <Link to="/checkout">
+              <button className="button">Checkout</button>
+            </Link>
           </div>
         </div>
       </div>

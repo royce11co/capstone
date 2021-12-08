@@ -2,7 +2,6 @@ import "./ProductPage.scss";
 import axios from "axios";
 import React from "react";
 import { Component } from "react";
-import { Redirect } from "react-router-dom";
 
 class ProductPage extends Component {
   state = {
@@ -45,22 +44,45 @@ class ProductPage extends Component {
       return <div className="Loading">Loading...</div>;
     }
     return (
-      <div>
+      <>
         <img
+          className="product-page__container--image"
           src={`${this.state.image}`}
           alt="product"
         />
-        <p>Product Description: {this.state.description}</p>
-        <p>Price: ${this.state.price}</p>
-        <p>Stock: {this.state.quantity}</p>
-        <div>
-          <form action="#" onSubmit={this.addToCart}>
-            <label htmlFor="quantity">Quantity</label>
-            <input type="number" id="quantity" name={this.state.name} min="0" max="99" />
-            <button type="submit">Add to cart</button>
-          </form>
+        <div className="product-page__container">
+          <p className="product-page__container--description">
+            Product Description: {this.state.description}
+          </p>
+          <p className="product-page__container--price">
+            Price: ${this.state.price}
+          </p>
+          <p className="product-page__container--stock">
+            Stock: {this.state.quantity}
+          </p>
+          <div>
+            <form action="#" onSubmit={this.addToCart}>
+              <label
+                className="product-page__container--quantity"
+                htmlFor="quantity"
+              >
+                Quantity
+              </label>
+              <input
+                className="product-page__container--input"
+                type="number"
+                id="quantity"
+                name={this.state.name}
+                min="0"
+                max="99"
+              />
+              <button className="product-page__container--button" type="submit">
+                Add to cart
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }
